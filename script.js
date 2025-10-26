@@ -460,4 +460,12 @@ function initSummary() {
     setTimeout(() => {
         launchConfetti();
     }, 300);
+
+    // Play summary video
+    const summaryVideo = document.getElementById('summaryVideo');
+    if (summaryVideo) {
+        summaryVideo.play().catch(e => {
+            console.log('Video autoplay prevented:', e);
+        });
+    }
 }

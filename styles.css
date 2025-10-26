@@ -736,6 +736,23 @@ body::before {
     color: #fff;
 }
 
+/* Summary Video */
+.summary-video-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 2rem auto 1rem;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    animation: fadeInUp 1.5s ease 0.8s both;
+}
+
+.summary-video-container video {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 /* Mobile Optimizations */
 @media (max-width: 480px) {
     .birthday-title {
