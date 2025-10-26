@@ -79,6 +79,9 @@ function goToSlide(index) {
     if (index === 3) initSlide3();
     if (index === 4) initSlide4();
     if (index === 5) initGameIntro();
+    if (index === 6) initGameChoice1(); // Gift 1 reveal
+    if (index === 8) initGameChoice2(); // Gift 2 reveal
+    if (index === 10) initGameChoice3(); // Gift 3 reveal
     if (index === 11) initSummary(); // Summary slide
 }
 
@@ -412,9 +415,12 @@ function animateBearWalk(doorElement, callback) {
 }
 
 // GAME CHOICE 1: Destination Result
-document.querySelector('#gameChoice1 .tap-continue').addEventListener('click', () => {
-    nextSlide();
-});
+function initGameChoice1() {
+    // Auto-advance after 3 seconds
+    setTimeout(() => {
+        nextSlide();
+    }, 3000);
+}
 
 // GAME WEAPON CHOICE
 const weaponDoors = document.querySelectorAll('#gameWeapon .door');
@@ -425,9 +431,12 @@ weaponDoors.forEach(door => {
 });
 
 // GAME CHOICE 2: Weapon Result
-document.querySelector('#gameChoice2 .tap-continue').addEventListener('click', () => {
-    nextSlide();
-});
+function initGameChoice2() {
+    // Auto-advance after 3 seconds
+    setTimeout(() => {
+        nextSlide();
+    }, 3000);
+}
 
 // GAME MISSION CHOICE
 const missionDoors = document.querySelectorAll('#gameMission .door');
@@ -438,9 +447,12 @@ missionDoors.forEach(door => {
 });
 
 // GAME CHOICE 3: Mission Result
-document.querySelector('#gameChoice3 .tap-continue').addEventListener('click', () => {
-    nextSlide();
-});
+function initGameChoice3() {
+    // Auto-advance after 3 seconds
+    setTimeout(() => {
+        nextSlide();
+    }, 3000);
+}
 
 // GAME SUMMARY: Final slide with confetti
 function initSummary() {
