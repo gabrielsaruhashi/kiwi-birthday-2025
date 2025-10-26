@@ -29,9 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
 function initProgressDots() {
     const progressDotsContainer = document.getElementById('progressDots');
     const totalSlides = slides.length;
+    const numDots = totalSlides;
 
-    // Create 3 dots to represent progress segments
-    for (let i = 0; i < 3; i++) {
+    // Create a dot for each slide
+    for (let i = 0; i < numDots; i++) {
         const dot = document.createElement('div');
         dot.className = 'progress-dot';
         if (i === 0) dot.classList.add('active');
@@ -44,18 +45,11 @@ function updateProgressBar() {
     const progress = ((currentSlideIndex + 1) / slides.length) * 100;
     document.getElementById('progressBar').style.width = progress + '%';
 
-    // Update progress dots
+    // Update progress dots - only the current one is active
     const dots = document.querySelectorAll('.progress-dot');
-    const totalSlides = slides.length;
-    const segmentSize = Math.ceil(totalSlides / 3);
 
     dots.forEach((dot, index) => {
-        const segmentStart = index * segmentSize;
-        const segmentEnd = (index + 1) * segmentSize;
-
-        if (currentSlideIndex >= segmentStart && currentSlideIndex < segmentEnd) {
-            dot.classList.add('active');
-        } else if (currentSlideIndex >= segmentEnd) {
+        if (index === currentSlideIndex) {
             dot.classList.add('active');
         } else {
             dot.classList.remove('active');
@@ -81,9 +75,11 @@ function goToSlide(index) {
 
     // Initialize slide-specific functionality
     if (index === 1) initSlide2();
-    if (index === 3) initSlide4();
-    if (index === 4) initGameIntro();
-    if (index === 10) initSummary(); // Summary slide is the 11th slide (index 10)
+    if (index === 2) initSlide2_5(); // Collage slide
+    if (index === 3) initSlide3();
+    if (index === 4) initSlide4();
+    if (index === 5) initGameIntro();
+    if (index === 11) initSummary(); // Summary slide
 }
 
 function nextSlide() {
@@ -163,10 +159,9 @@ function launchConfetti() {
     }());
 }
 
-// SLIDE 2: Memory Montage & Carousel
+// SLIDE 2: Memory Montage
 function initSlide2() {
     const montageContainer = document.getElementById('montageContainer');
-    const carouselContainer = document.getElementById('carouselContainer');
     const music = document.getElementById('carouselMusic');
 
     // Start playing music
@@ -186,14 +181,29 @@ function initSlide2() {
             montageIndex++;
         } else {
             clearInterval(montageInterval);
-            // Start carousel
+            // Move to collage slide
             setTimeout(() => {
-                montageContainer.style.display = 'none';
-                carouselContainer.classList.remove('hidden');
-                initCarousel();
+                nextSlide();
             }, 300);
         }
     }, 100);
+}
+
+// SLIDE 2.5: Memory Collage
+function initSlide2_5() {
+    const collageGrid = document.getElementById('collageGrid');
+
+    // Create collage with all images
+    imageList.forEach(img => {
+        const imgElement = document.createElement('img');
+        imgElement.src = `./images/${img}`;
+        collageGrid.appendChild(imgElement);
+    });
+
+    // Auto-advance after 3 seconds
+    setTimeout(() => {
+        nextSlide();
+    }, 3000);
 }
 
 let currentCarouselIndex = 0;
@@ -266,6 +276,10 @@ function updateCarousel() {
 }
 
 // SLIDE 3: Looking Forward
+function initSlide3() {
+    // Any initialization if needed
+}
+
 document.querySelector('#slide3 .tap-continue').addEventListener('click', () => {
     nextSlide();
 });
