@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Background circle -->
+  <circle cx="16" cy="16" r="16" fill="#f5a623"/>
+
+  <!-- Left Bear (Slightly smaller, behind) -->
+  <!-- Left ear -->
+  <circle cx="9" cy="11" r="3" fill="#fff"/>
+  <!-- Right ear -->
+  <circle cx="15" cy="11" r="3" fill="#fff"/>
+  <!-- Head -->
+  <circle cx="12" cy="14" r="5.5" fill="#fff"/>
+  <!-- Left eye -->
+  <circle cx="10.5" cy="13.5" r="1" fill="#000"/>
+  <!-- Right eye -->
+  <circle cx="13.5" cy="13.5" r="1" fill="#000"/>
+  <!-- Nose -->
+  <ellipse cx="12" cy="15.5" rx="1" ry="0.7" fill="#000"/>
+
+  <!-- Right Bear (Slightly larger, in front) -->
+  <!-- Left ear -->
+  <circle cx="17" cy="12.5" r="3.5" fill="#f8b84e"/>
+  <!-- Right ear -->
+  <circle cx="24" cy="12.5" r="3.5" fill="#f8b84e"/>
+  <!-- Head -->
+  <circle cx="20.5" cy="16.5" r="6.5" fill="#f8b84e"/>
+  <!-- Left eye -->
+  <circle cx="18.5" cy="15.5" r="1.2" fill="#000"/>
+  <!-- Right eye -->
+  <circle cx="22.5" cy="15.5" r="1.2" fill="#000"/>
+  <!-- Nose -->
+  <ellipse cx="20.5" cy="18" rx="1.2" ry="0.8" fill="#000"/>
+
+  <!-- Heart between them -->
+  <g transform="translate(12, 20)">
+    <path d="M 0,-1 C -1.5,-3 -4,-3 -4,-1 C -4,1 0,3 0,4 C 0,3 4,1 4,-1 C 4,-3 1.5,-3 0,-1 Z"
+          fill="#ff6b6b" opacity="0.9"/>
+  </g>
+</svg>

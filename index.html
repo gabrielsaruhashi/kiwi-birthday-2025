@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gabe Wrapped for Kira</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" type="image/svg+xml" href="favicon-simple.svg">
+    <link rel="apple-touch-icon" href="favicon-simple.svg">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Progress Indicator -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+        <div class="progress-dots" id="progressDots"></div>
+    </div>
+
+    <!-- Bottom Swipe Indicator -->
+    <div class="swipe-indicator"></div>
+
+    <!-- Slide 1: Welcome -->
+    <div class="slide active" id="slide1">
+        <div class="slide-content">
+            <h1 class="birthday-title">Happy Birthday Bubu</h1>
+            <p class="intro-text">Hi KiwiBear. It's that time of the year again.</p>
+            <p class="intro-text">Gabe Wrapped's ready. Are you?</p>
+            <button class="tap-continue">Tap to continue</button>
+        </div>
+    </div>
+
+    <!-- Slide 2: Memory Montage -->
+    <div class="slide" id="slide2">
+        <div class="slide-content">
+            <div class="montage-container" id="montageContainer"></div>
+            <div class="carousel-container hidden" id="carouselContainer">
+                <div class="carousel-track" id="carouselTrack"></div>
+                <button class="carousel-btn prev" id="prevBtn">‹</button>
+                <button class="carousel-btn next" id="nextBtn">›</button>
+            </div>
+            <audio id="carouselMusic" loop>
+                <source src="./music/Depth_of_Field_-_alumo.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+    </div>
+
+    <!-- Slide 3: Looking Forward -->
+    <div class="slide" id="slide3">
+        <div class="slide-content looking-forward">
+            <div class="final-bear-bg"></div>
+            <div class="text-overlay">
+                <p class="forward-text">And I can't wait for the next step in the journey</p>
+            </div>
+            <button class="tap-continue">Tap to continue</button>
+        </div>
+    </div>
+
+    <!-- Slide 4: Video Moment -->
+    <div class="slide" id="slide4">
+        <div class="slide-content video-container">
+            <video id="birthdayVideo" playsinline>
+                <source src="./video/MovieDuduBubu.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+    <!-- Game Intro -->
+    <div class="slide" id="gameIntro">
+        <div class="slide-content game-screen">
+            <canvas id="bearCanvas" width="200" height="200"></canvas>
+            <p class="game-text">Kiwibear, pick your destination</p>
+            <div class="doors-container">
+                <div class="door door-blue" data-choice="destination-1"></div>
+                <div class="door door-green" data-choice="destination-2"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Choice 1: Destination Result -->
+    <div class="slide" id="gameChoice1">
+        <div class="slide-content game-screen">
+            <img src="./game/gift1 .jpg" alt="Destination" class="game-image">
+            <button class="tap-continue">Continue</button>
+        </div>
+    </div>
+
+    <!-- Game Choice 2: Weapon -->
+    <div class="slide" id="gameWeapon">
+        <div class="slide-content game-screen">
+            <p class="game-text">Pick your weapon</p>
+            <div class="doors-container">
+                <div class="door door-purple" data-choice="weapon-1"></div>
+                <div class="door door-orange" data-choice="weapon-2"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Choice 2: Weapon Result -->
+    <div class="slide" id="gameChoice2">
+        <div class="slide-content game-screen">
+            <img src="./game/gift2.jpg" alt="MacBook Rosa" class="game-image enlarged">
+            <p class="game-text overlay-text">Kiwibear finds a MacBook Rosa</p>
+            <button class="tap-continue">Continue</button>
+        </div>
+    </div>
+
+    <!-- Game Choice 3: Mission -->
+    <div class="slide" id="gameMission">
+        <div class="slide-content game-screen">
+            <p class="game-text">Pick your mission starting point</p>
+            <div class="doors-container">
+                <div class="door door-red" data-choice="mission-1"></div>
+                <div class="door door-yellow" data-choice="mission-2"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Choice 3: Mission Result -->
+    <div class="slide" id="gameChoice3">
+        <div class="slide-content game-screen">
+            <img src="./game/gift3.jpg" alt="Hot Spring" class="game-image fade-in">
+            <p class="game-text overlay-text">Bubu Bear is found at a hot spring</p>
+            <button class="tap-continue">Continue</button>
+        </div>
+    </div>
+
+    <!-- Summary: Gift Collection -->
+    <div class="slide" id="gameSummary">
+        <div class="slide-content summary-screen">
+            <h1 class="summary-title">Bubu has 3 new additions to her collection!!!</h1>
+
+            <div class="gifts-list">
+                <div class="gift-item">
+                    <img src="./game/gift1 .jpg" alt="Gift 1" class="gift-thumbnail">
+                    <div class="gift-info">
+                        <h3 class="gift-title">Destination Adventure</h3>
+                        <p class="gift-description">A journey to new horizons where memories are made and adventures await around every corner.</p>
+                    </div>
+                </div>
+
+                <div class="gift-item">
+                    <img src="./game/gift2.jpg" alt="Gift 2" class="gift-thumbnail">
+                    <div class="gift-info">
+                        <h3 class="gift-title">MacBook Rosa</h3>
+                        <p class="gift-description">A powerful companion for creativity and productivity, ready to bring all your ideas to life in style.</p>
+                    </div>
+                </div>
+
+                <div class="gift-item">
+                    <img src="./game/gift3.jpg" alt="Gift 3" class="gift-thumbnail">
+                    <div class="gift-info">
+                        <h3 class="gift-title">Hot Spring Retreat</h3>
+                        <p class="gift-description">A relaxing escape to soak away the stress and rejuvenate mind, body, and spirit in natural warmth.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./assets/vendor/canvas-confetti/dist/confetti.browser.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

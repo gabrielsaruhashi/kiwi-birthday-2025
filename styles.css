@@ -1,0 +1,714 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    overflow: hidden;
+    background: #f5a623;
+    color: #fff;
+    height: 100vh;
+    width: 100vw;
+    touch-action: pan-y;
+    position: relative;
+}
+
+/* Sunburst Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        repeating-conic-gradient(
+            from 0deg at 50% 50%,
+            #f5a623 0deg,
+            #f5a623 4deg,
+            #f8b84e 4deg,
+            #f8b84e 8deg,
+            #f5a623 8deg,
+            #f5a623 12deg,
+            #e89a1f 12deg,
+            #e89a1f 16deg
+        );
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Progress Dots */
+.progress-container {
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 1000;
+}
+
+.progress-bar {
+    display: none;
+}
+
+.progress-dots {
+    display: flex;
+    gap: 8px;
+}
+
+.progress-dot {
+    width: 60px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.progress-dot.active {
+    background: #fff;
+}
+
+/* Bottom Swipe Indicator */
+.swipe-indicator {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 3px;
+    z-index: 1000;
+}
+
+/* Slide Container */
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+
+.slide.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: all;
+}
+
+.slide.prev {
+    transform: translateX(-100%);
+}
+
+.slide-content {
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Slide 1: Welcome */
+.birthday-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 2rem;
+    animation: titlePop 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+}
+
+@keyframes titlePop {
+    0% {
+        transform: scale(0) rotate(-10deg);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) rotate(0);
+        opacity: 1;
+    }
+}
+
+.intro-text {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.intro-text:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.intro-text:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tap-continue {
+    margin-top: 2rem;
+    padding: 16px 45px;
+    font-size: 1.1rem;
+    background: #fff;
+    border: none;
+    border-radius: 50px;
+    color: #f5a623;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 700;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 0.9s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.tap-continue:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Slide 2: Memory Montage */
+.montage-container {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.montage-image {
+    position: absolute;
+    width: 80%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    object-fit: cover;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    border-radius: 0;
+    transition: opacity 0.6s ease;
+}
+
+.carousel-container.hidden {
+    display: none;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+    height: 100%;
+}
+
+.carousel-item {
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    object-fit: cover;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    backdrop-filter: blur(10px);
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.carousel-btn:active {
+    transform: translateY(-50%) scale(0.9);
+}
+
+.carousel-btn.prev {
+    left: 10px;
+}
+
+.carousel-btn.next {
+    right: 10px;
+}
+
+/* Slide 3: Looking Forward */
+.looking-forward {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+}
+
+.final-bear-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./images/finalBear.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+    filter: blur(3px);
+}
+
+.looking-forward::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-conic-gradient(
+        from 0deg at 50% 50%,
+        rgba(245, 166, 35, 0.6) 0deg,
+        rgba(245, 166, 35, 0.6) 4deg,
+        rgba(248, 184, 78, 0.6) 4deg,
+        rgba(248, 184, 78, 0.6) 8deg,
+        rgba(245, 166, 35, 0.6) 8deg,
+        rgba(245, 166, 35, 0.6) 12deg,
+        rgba(232, 154, 31, 0.6) 12deg,
+        rgba(232, 154, 31, 0.6) 16deg
+    );
+    z-index: 0;
+}
+
+.text-overlay {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+}
+
+.forward-text {
+    font-size: 2rem;
+    font-weight: 900;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    line-height: 1.3;
+    animation: fadeInUp 1s ease;
+    letter-spacing: -0.5px;
+}
+
+/* Slide 4: Video */
+.video-container {
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+}
+
+#birthdayVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Game Screens */
+.game-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    position: relative;
+}
+
+.game-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-conic-gradient(
+        from 0deg at 50% 50%,
+        #f5a623 0deg,
+        #f5a623 4deg,
+        #f8b84e 4deg,
+        #f8b84e 8deg,
+        #f5a623 8deg,
+        #f5a623 12deg,
+        #e89a1f 12deg,
+        #e89a1f 16deg
+    );
+    z-index: 0;
+}
+
+.game-screen > * {
+    position: relative;
+    z-index: 1;
+}
+
+#bearCanvas {
+    width: 200px;
+    height: 200px;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+.game-text {
+    font-size: 1.8rem;
+    font-weight: 900;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    animation: fadeInUp 0.5s ease;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+.doors-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    animation: fadeInUp 0.8s ease 0.3s both;
+}
+
+.door {
+    width: 120px;
+    height: 180px;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.door::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    width: 15px;
+    height: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
+
+.door:active {
+    transform: scale(0.95);
+}
+
+.door-blue {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.door-green {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.door-purple {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+.door-orange {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.door-red {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.door-yellow {
+    background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%);
+}
+
+.game-image {
+    width: 100%;
+    height: 85vh;
+    border-radius: 0;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    animation: scaleIn 0.6s ease;
+    object-fit: cover;
+}
+
+.game-image.enlarged {
+    animation: zoomIn 0.8s ease;
+}
+
+.game-image.fade-in {
+    animation: fadeInScale 1s ease;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.overlay-text {
+    margin-top: 1rem;
+    font-size: 1.3rem;
+    animation: fadeInUp 0.8s ease 0.5s both;
+}
+
+/* Walking Bear Animation */
+@keyframes walkToDoor {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(150px);
+    }
+}
+
+.bear-walking {
+    animation: walkToDoor 1s ease forwards;
+}
+
+/* Summary Screen */
+.summary-screen {
+    padding: 30px 20px;
+    overflow-y: auto;
+    max-height: 100vh;
+    position: relative;
+}
+
+.summary-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-conic-gradient(
+        from 0deg at 50% 50%,
+        #f5a623 0deg,
+        #f5a623 4deg,
+        #f8b84e 4deg,
+        #f8b84e 8deg,
+        #f5a623 8deg,
+        #f5a623 12deg,
+        #e89a1f 12deg,
+        #e89a1f 16deg
+    );
+    z-index: 0;
+}
+
+.summary-screen > * {
+    position: relative;
+    z-index: 1;
+}
+
+.summary-title {
+    font-size: 2.2rem;
+    font-weight: 900;
+    margin-bottom: 2rem;
+    text-align: center;
+    animation: fadeInUp 0.8s ease;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+}
+
+.gifts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    animation: fadeInUp 1s ease 0.3s both;
+}
+
+.gift-item {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.gift-item:active {
+    transform: scale(0.98);
+}
+
+.gift-thumbnail {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
+}
+
+.gift-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.gift-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+    color: #ffd93d;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.gift-description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+    opacity: 0.95;
+    color: #fff;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 480px) {
+    .birthday-title {
+        font-size: 2.2rem;
+    }
+
+    .intro-text {
+        font-size: 1.1rem;
+    }
+
+    .forward-text {
+        font-size: 1.4rem;
+    }
+
+    .game-text {
+        font-size: 1.2rem;
+    }
+
+    .door {
+        width: 100px;
+        height: 150px;
+    }
+
+    .doors-container {
+        gap: 1.5rem;
+    }
+
+    .summary-title {
+        font-size: 1.6rem;
+    }
+
+    .gift-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .gift-thumbnail {
+        width: 100%;
+        height: 200px;
+    }
+
+    .gift-title {
+        font-size: 1.2rem;
+    }
+
+    .gift-description {
+        font-size: 0.9rem;
+    }
+}
+
+/* Landscape mode adjustments */
+@media (orientation: landscape) and (max-height: 500px) {
+    .birthday-title {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .intro-text {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .tap-continue {
+        margin-top: 1rem;
+        padding: 10px 30px;
+    }
+
+    .carousel-container {
+        height: 80vh;
+    }
+
+    .door {
+        height: 120px;
+    }
+}
+
+/* Hidden utility class */
+.hidden {
+    display: none !important;
+}
