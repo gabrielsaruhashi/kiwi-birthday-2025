@@ -468,4 +468,35 @@ function initSummary() {
             console.log('Video autoplay prevented:', e);
         });
     }
+
+    // Initialize card flip animations
+    initCardFlips();
+}
+
+// Card flip functionality
+function initCardFlips() {
+    const cards = document.querySelectorAll('.gift-card-container');
+
+    // Automatic double-flip for each card on load
+    cards.forEach((card, index) => {
+        // Stagger the automatic flips
+        const delay = 1500 + (index * 1000);
+
+        // First flip (show back)
+        setTimeout(() => {
+            card.classList.add('flipped');
+        }, delay);
+
+        // Second flip (show front again)
+        setTimeout(() => {
+            card.classList.remove('flipped');
+        }, delay + 1200);
+    });
+
+    // Add click handlers for manual flipping
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            card.classList.toggle('flipped');
+        });
+    });
 }
