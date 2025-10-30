@@ -78,11 +78,12 @@ function goToSlide(index) {
     if (index === 2) initSlide2_5(); // Collage slide
     if (index === 3) initSlide3();
     if (index === 4) initSlide4();
-    if (index === 5) initGameIntro();
-    if (index === 6) initGameChoice1(); // Gift 1 reveal
-    if (index === 8) initGameChoice2(); // Gift 2 reveal
-    if (index === 10) initGameChoice3(); // Gift 3 reveal
-    if (index === 11) initSummary(); // Summary slide
+    if (index === 5) initGameStart(); // Gift 0 - BBQ Feast
+    if (index === 6) initGameIntro();
+    if (index === 7) initGameChoice1(); // Gift 1 reveal
+    if (index === 9) initGameChoice2(); // Gift 2 reveal
+    if (index === 11) initGameChoice3(); // Gift 3 reveal
+    if (index === 12) initSummary(); // Summary slide
 }
 
 function nextSlide() {
@@ -302,6 +303,14 @@ function initSlide4() {
     video.addEventListener('ended', () => {
         nextSlide();
     });
+}
+
+// GAME START: BBQ Feast
+function initGameStart() {
+    // Auto-advance after 3 seconds
+    setTimeout(() => {
+        nextSlide();
+    }, 3000);
 }
 
 // GAME INTRO
