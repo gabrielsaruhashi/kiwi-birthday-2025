@@ -71,7 +71,20 @@
         </div>
     </div>
 
-    <!-- Game Start: Bear BBQ Feast -->
+    <!-- Game Intro: Brazilian Door -->
+    <div class="slide" id="gameIntro">
+        <div class="slide-content game-screen">
+            <canvas id="bearCanvas" width="200" height="200"></canvas>
+            <p class="game-text">Kiwibear, pick your door</p>
+            <div class="doors-container">
+                <div class="door door-brazil" data-choice="gift0">
+                    <canvas id="brazilFlagCanvas" width="60" height="40"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gift 0: Bear BBQ Feast Result -->
     <div class="slide" id="gameStart">
         <div class="slide-content game-screen">
             <img src="./game/gift0.jpg" alt="Bear BBQ Feast" class="game-image">
@@ -81,19 +94,15 @@
         </div>
     </div>
 
-    <!-- Game Intro -->
-    <div class="slide" id="gameIntro">
+    <!-- Game Plane: Costa Rica -->
+    <div class="slide" id="gamePlane">
         <div class="slide-content game-screen">
-            <canvas id="bearCanvas" width="200" height="200"></canvas>
-            <p class="game-text">Kiwibear, pick your destination</p>
-            <div class="doors-container">
-                <div class="door door-blue" data-choice="destination-1"></div>
-                <div class="door door-green" data-choice="destination-2"></div>
-            </div>
+            <canvas id="planeCanvas" width="300" height="200"></canvas>
+            <button class="board-plane-btn">Board Plane</button>
         </div>
     </div>
 
-    <!-- Game Choice 1: Destination Result -->
+    <!-- Gift 1: Flight to Costa Rica Result -->
     <div class="slide" id="gameChoice1">
         <div class="slide-content game-screen">
             <img src="./game/gift1 .jpg" alt="Destination" class="game-image">
@@ -106,9 +115,15 @@
     <div class="slide" id="gameWeapon">
         <div class="slide-content game-screen">
             <p class="game-text">Pick your weapon</p>
-            <div class="doors-container">
-                <div class="door door-purple" data-choice="weapon-1"></div>
-                <div class="door door-orange" data-choice="weapon-2"></div>
+            <div class="weapon-choices">
+                <div class="weapon-item" data-choice="macbook" data-gift-img="./game/gift2.jpg" data-gift-name="MacBook Rosa">
+                    <img src="./game/gift2.jpg" alt="MacBook Rosa" class="weapon-image">
+                    <p class="weapon-label">MacBook Rosa</p>
+                </div>
+                <div class="weapon-item" data-choice="watch" data-gift-img="./game/gift2b.jpg" data-gift-name="Apple Watch SE">
+                    <img src="./game/gift2b.jpg" alt="Apple Watch SE" class="weapon-image">
+                    <p class="weapon-label">Apple Watch SE</p>
+                </div>
             </div>
         </div>
     </div>
@@ -116,8 +131,8 @@
     <!-- Game Choice 2: Weapon Result -->
     <div class="slide" id="gameChoice2">
         <div class="slide-content game-screen">
-            <img src="./game/gift2.jpg" alt="MacBook Rosa" class="game-image enlarged">
-            <p class="game-text overlay-text">Kiwibear finds a MacBook Rosa</p>
+            <img id="weaponResultImage" src="./game/gift2.jpg" alt="Weapon" class="game-image enlarged">
+            <p id="weaponResultText" class="game-text overlay-text">Kiwibear finds a MacBook Rosa</p>
             <div class="countdown-bar" id="countdownBar2"></div>
         </div>
     </div>
@@ -190,20 +205,20 @@
                     </div>
                 </div>
 
-                <!-- Gift 2: MacBook Rosa -->
+                <!-- Gift 2: MacBook Rosa / Apple Watch SE -->
                 <div class="gift-card-container" data-card="2">
                     <div class="gift-card">
                         <div class="gift-card-front">
                             <div class="gift-item">
-                                <img src="./game/gift2.jpg" alt="Gift 2" class="gift-thumbnail">
+                                <img id="summaryWeaponImage" src="./game/gift2.jpg" alt="Gift 2" class="gift-thumbnail">
                                 <div class="gift-info">
-                                    <h3 class="gift-title">MacBook Rosa</h3>
-                                    <p class="gift-description">The MacBook will help Kiwi Bubu in NYC with her next adventures.</p>
+                                    <h3 id="summaryWeaponTitle" class="gift-title">MacBook Rosa</h3>
+                                    <p id="summaryWeaponDescription" class="gift-description">The MacBook will help Kiwi Bubu in NYC with her next adventures.</p>
                                 </div>
                             </div>
                         </div>
                         <div class="gift-card-back">
-                            <img src="./assets/card-backs/macbook.jpg" alt="MacBook" class="card-back-image">
+                            <img id="summaryWeaponBackImage" src="./assets/card-backs/macbook.jpg" alt="MacBook" class="card-back-image">
                         </div>
                     </div>
                 </div>
@@ -216,7 +231,7 @@
                                 <img src="./game/gift3.jpg" alt="Gift 3" class="gift-thumbnail">
                                 <div class="gift-info">
                                     <h3 class="gift-title">Hot Spring Retreat</h3>
-                                    <p class="gift-description">Bubulover deserves some recharge.</p>
+                                    <p class="gift-description">Day pass at the Tabacon luxury hot springs with dinner</p>
                                 </div>
                             </div>
                         </div>

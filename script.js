@@ -4,6 +4,14 @@ const slides = document.querySelectorAll('.slide');
 let touchStartX = 0;
 let touchEndX = 0;
 
+// Game choices
+let weaponChoice = {
+    name: 'MacBook Rosa',
+    image: './game/gift2.jpg',
+    description: 'The MacBook will help Kiwi Bubu in NYC with her next adventures.',
+    backImage: './assets/card-backs/macbook.jpg'
+};
+
 // Image list for carousel
 const imageList = [
     'IMG_1252.jpg', 'IMG_1902.jpg', 'IMG_2059.jpg', 'IMG_2070.jpg',
@@ -78,12 +86,13 @@ function goToSlide(index) {
     if (index === 2) initSlide2_5(); // Collage slide
     if (index === 3) initSlide3();
     if (index === 4) initSlide4();
-    if (index === 5) initGameStart(); // Gift 0 - BBQ Feast
-    if (index === 6) initGameIntro();
-    if (index === 7) initGameChoice1(); // Gift 1 reveal
-    if (index === 9) initGameChoice2(); // Gift 2 reveal
-    if (index === 11) initGameChoice3(); // Gift 3 reveal
-    if (index === 12) initSummary(); // Summary slide
+    if (index === 5) initGameIntro(); // Brazilian door
+    if (index === 6) initGameStart(); // Gift 0 - BBQ Feast reveal
+    if (index === 7) initGamePlane(); // Costa Rica plane
+    if (index === 8) initGameChoice1(); // Gift 1 - Flight reveal
+    if (index === 10) initGameChoice2(); // Gift 2 reveal
+    if (index === 12) initGameChoice3(); // Gift 3 reveal
+    if (index === 13) initSummary(); // Summary slide
 }
 
 function nextSlide() {
@@ -117,7 +126,7 @@ function handleSwipe() {
 
 function canSwipeNext() {
     // Disable swipe on slides with buttons or interactive elements
-    const noSwipeSlides = [0, 2, 5, 6, 7, 8, 9, 10];
+    const noSwipeSlides = [0, 2, 5, 7, 9];
     return !noSwipeSlides.includes(currentSlideIndex);
 }
 
@@ -313,16 +322,108 @@ function initGameStart() {
     }, 3000);
 }
 
+// GAME PLANE: Costa Rica
+function initGamePlane() {
+    drawPixelPlane();
+
+    const boardBtn = document.querySelector('.board-plane-btn');
+    boardBtn.addEventListener('click', () => {
+        nextSlide();
+    });
+}
+
+function drawPixelPlane() {
+    const canvas = document.getElementById('planeCanvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+    const pixelSize = 6;
+
+    // Clear canvas
+    ctx.clearRect(0, 0, w, h);
+
+    // Draw pixelated plane body (white)
+    ctx.fillStyle = '#ffffff';
+    const planeBody = [
+        // Fuselage
+        [15,8],[16,8],[17,8],[18,8],[19,8],[20,8],[21,8],[22,8],[23,8],[24,8],
+        [15,9],[16,9],[17,9],[18,9],[19,9],[20,9],[21,9],[22,9],[23,9],[24,9],[25,9],
+        [15,10],[16,10],[17,10],[18,10],[19,10],[20,10],[21,10],[22,10],[23,10],[24,10],[25,10],[26,10],
+        [15,11],[16,11],[17,11],[18,11],[19,11],[20,11],[21,11],[22,11],[23,11],[24,11],[25,11],[26,11],
+        [15,12],[16,12],[17,12],[18,12],[19,12],[20,12],[21,12],[22,12],[23,12],[24,12],[25,12],[26,12],
+        [15,13],[16,13],[17,13],[18,13],[19,13],[20,13],[21,13],[22,13],[23,13],[24,13],[25,13],
+        [15,14],[16,14],[17,14],[18,14],[19,14],[20,14],[21,14],[22,14],[23,14],[24,14],
+        // Nose cone
+        [26,11],[27,11],[28,11]
+    ];
+
+    planeBody.forEach(([x, y]) => {
+        ctx.fillRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
+    });
+
+    // Draw wings (light gray)
+    ctx.fillStyle = '#cccccc';
+    const wings = [
+        // Top wing
+        [18,5],[19,5],[20,5],[21,5],
+        [17,6],[18,6],[19,6],[20,6],[21,6],[22,6],
+        [16,7],[17,7],[18,7],[19,7],[20,7],[21,7],[22,7],[23,7],
+        // Bottom wing
+        [16,15],[17,15],[18,15],[19,15],[20,15],[21,15],[22,15],[23,15],
+        [17,16],[18,16],[19,16],[20,16],[21,16],[22,16],
+        [18,17],[19,17],[20,17],[21,17]
+    ];
+
+    wings.forEach(([x, y]) => {
+        ctx.fillRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
+    });
+
+    // Draw tail
+    ctx.fillStyle = '#ffffff';
+    const tail = [
+        [14,9],[14,10],[14,11],[14,12],[14,13],
+        [13,10],[13,11],[13,12]
+    ];
+
+    tail.forEach(([x, y]) => {
+        ctx.fillRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
+    });
+
+    // Draw windows (dark blue)
+    ctx.fillStyle = '#4a90e2';
+    const windows = [
+        [17,10],[18,10],[20,10],[21,10],[23,10],[24,10]
+    ];
+
+    windows.forEach(([x, y]) => {
+        ctx.fillRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
+    });
+
+    // Draw Costa Rican flag on plane (simplified)
+    // Blue stripe
+    ctx.fillStyle = '#002b7f';
+    ctx.fillRect(19 * pixelSize, 11 * pixelSize, 4 * pixelSize, pixelSize);
+
+    // White stripe
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(19 * pixelSize, 12 * pixelSize, 4 * pixelSize, pixelSize);
+
+    // Red stripe
+    ctx.fillStyle = '#ce1126';
+    ctx.fillRect(19 * pixelSize, 13 * pixelSize, 4 * pixelSize, pixelSize);
+}
+
 // GAME INTRO
 function initGameIntro() {
     drawPixelBear();
+    drawBrazilFlag();
 
-    const doors = document.querySelectorAll('#gameIntro .door');
-    doors.forEach(door => {
-        door.addEventListener('click', (e) => {
-            animateBearWalk(e.target, () => {
-                nextSlide();
-            });
+    const door = document.querySelector('#gameIntro .door');
+    door.addEventListener('click', () => {
+        animateBearWalk(door, () => {
+            nextSlide();
         });
     });
 }
@@ -413,6 +514,56 @@ function drawPixelBear() {
     });
 }
 
+function drawBrazilFlag() {
+    const canvas = document.getElementById('brazilFlagCanvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+    const pixelSize = 4;
+
+    // Clear canvas
+    ctx.clearRect(0, 0, w, h);
+
+    // Green background
+    ctx.fillStyle = '#009b3a';
+    ctx.fillRect(0, 0, w, h);
+
+    // Yellow diamond (pixelated)
+    ctx.fillStyle = '#fedd00';
+    const diamondPixels = [
+        // Top point
+        [7,2],[8,2],
+        [6,3],[7,3],[8,3],[9,3],
+        [5,4],[6,4],[7,4],[8,4],[9,4],[10,4],
+        // Middle (widest)
+        [4,5],[5,5],[6,5],[7,5],[8,5],[9,5],[10,5],[11,5],
+        [4,6],[5,6],[6,6],[7,6],[8,6],[9,6],[10,6],[11,6],
+        // Bottom half
+        [5,7],[6,7],[7,7],[8,7],[9,7],[10,7],
+        [6,8],[7,8],[8,8],[9,8],
+        [7,9],[8,9]
+    ];
+
+    diamondPixels.forEach(([x, y]) => {
+        ctx.fillRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
+    });
+
+    // Blue circle (pixelated)
+    ctx.fillStyle = '#002776';
+    const circlePixels = [
+        [6,4],[7,4],[8,4],[9,4],
+        [6,5],[7,5],[8,5],[9,5],
+        [6,6],[7,6],[8,6],[9,6],
+        [6,7],[7,7],[8,7],[9,7]
+    ];
+
+    circlePixels.forEach(([x, y]) => {
+        ctx.fillRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
+    });
+}
+
 function animateBearWalk(doorElement, callback) {
     const canvas = document.getElementById('bearCanvas');
     canvas.classList.add('bear-walking');
@@ -432,15 +583,64 @@ function initGameChoice1() {
 }
 
 // GAME WEAPON CHOICE
-const weaponDoors = document.querySelectorAll('#gameWeapon .door');
-weaponDoors.forEach(door => {
-    door.addEventListener('click', () => {
-        nextSlide();
+function initWeaponChoice() {
+    const weaponItems = document.querySelectorAll('#gameWeapon .weapon-item');
+    weaponItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const choice = item.dataset.choice;
+            const giftImg = item.dataset.giftImg;
+            const giftName = item.dataset.giftName;
+
+            // Store the weapon choice
+            if (choice === 'macbook') {
+                weaponChoice = {
+                    name: 'MacBook Rosa',
+                    image: './game/gift2.jpg',
+                    description: 'The MacBook will help Kiwi Bubu in NYC with her next adventures.',
+                    backImage: './assets/card-backs/macbook.jpg'
+                };
+            } else if (choice === 'watch') {
+                weaponChoice = {
+                    name: 'Apple Watch SE',
+                    image: './game/gift2b.jpg',
+                    description: 'The Apple Watch will help Kiwi track her adventures and stay connected.',
+                    backImage: './game/gift2b.jpg'
+                };
+            }
+
+            // Update the result slide
+            updateWeaponResult();
+
+            nextSlide();
+        });
     });
+}
+
+// Initialize weapon choice on page load
+document.addEventListener('DOMContentLoaded', () => {
+    initWeaponChoice();
 });
+
+// Update weapon result slide with chosen weapon
+function updateWeaponResult() {
+    const resultImage = document.getElementById('weaponResultImage');
+    const resultText = document.getElementById('weaponResultText');
+
+    if (resultImage) {
+        resultImage.src = weaponChoice.image;
+        resultImage.alt = weaponChoice.name;
+    }
+
+    if (resultText) {
+        resultText.textContent = `Kiwibear finds a ${weaponChoice.name}`;
+    }
+}
 
 // GAME CHOICE 2: Weapon Result
 function initGameChoice2() {
+    // Make sure the result is updated
+    updateWeaponResult();
+
     // Auto-advance after 3 seconds
     setTimeout(() => {
         nextSlide();
@@ -465,6 +665,9 @@ function initGameChoice3() {
 
 // GAME SUMMARY: Final slide with confetti
 function initSummary() {
+    // Update summary card with chosen weapon
+    updateSummaryWeapon();
+
     // Trigger confetti celebration
     setTimeout(() => {
         launchConfetti();
@@ -480,6 +683,32 @@ function initSummary() {
 
     // Initialize card flip animations
     initCardFlips();
+}
+
+// Update summary card with chosen weapon
+function updateSummaryWeapon() {
+    const summaryImage = document.getElementById('summaryWeaponImage');
+    const summaryTitle = document.getElementById('summaryWeaponTitle');
+    const summaryDescription = document.getElementById('summaryWeaponDescription');
+    const summaryBackImage = document.getElementById('summaryWeaponBackImage');
+
+    if (summaryImage) {
+        summaryImage.src = weaponChoice.image;
+        summaryImage.alt = weaponChoice.name;
+    }
+
+    if (summaryTitle) {
+        summaryTitle.textContent = weaponChoice.name;
+    }
+
+    if (summaryDescription) {
+        summaryDescription.textContent = weaponChoice.description;
+    }
+
+    if (summaryBackImage) {
+        summaryBackImage.src = weaponChoice.backImage;
+        summaryBackImage.alt = weaponChoice.name;
+    }
 }
 
 // Card flip functionality

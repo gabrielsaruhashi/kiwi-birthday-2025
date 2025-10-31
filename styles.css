@@ -519,6 +519,53 @@ body::before {
     animation: fadeInUp 0.8s ease 0.3s both;
 }
 
+.weapon-choices {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    animation: fadeInUp 0.8s ease 0.3s both;
+    flex-wrap: wrap;
+}
+
+.weapon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.weapon-item:active {
+    transform: scale(0.95);
+}
+
+.weapon-item:hover {
+    transform: scale(1.05);
+}
+
+.weapon-image {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.weapon-label {
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
 .door {
     width: 120px;
     height: 180px;
@@ -568,6 +615,61 @@ body::before {
 
 .door-yellow {
     background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%);
+}
+
+.door-brazil {
+    background: linear-gradient(to bottom,
+        #009b3a 0%,
+        #009b3a 35%,
+        #fedd00 35%,
+        #fedd00 65%,
+        #002776 65%,
+        #002776 100%
+    );
+    position: relative;
+}
+
+.door-brazil canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+.door-brazil::before {
+    display: none;
+}
+
+/* Plane Canvas */
+#planeCanvas {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    margin-bottom: 2rem;
+    animation: fadeInUp 0.8s ease;
+}
+
+/* Board Plane Button */
+.board-plane-btn {
+    padding: 16px 45px;
+    font-size: 1.2rem;
+    background: #fff;
+    border: none;
+    border-radius: 50px;
+    color: #f5a623;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    animation: fadeInUp 0.8s ease 0.3s both;
+}
+
+.board-plane-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .game-image {
