@@ -324,8 +324,6 @@ function initGameStart() {
 
 // GAME PLANE: Costa Rica
 function initGamePlane() {
-    drawPixelPlane();
-
     const boardBtn = document.querySelector('.board-plane-btn');
     boardBtn.addEventListener('click', () => {
         nextSlide();
@@ -420,11 +418,30 @@ function initGameIntro() {
     drawPixelBear();
     drawBrazilFlag();
 
+    // Show modal on first visit to gift adventure
+    showGiftModal();
+
     const door = document.querySelector('#gameIntro .door');
     door.addEventListener('click', () => {
         animateBearWalk(door, () => {
             nextSlide();
         });
+    });
+}
+
+// Gift Adventure Modal
+function showGiftModal() {
+    const modal = document.getElementById('giftModal');
+    const modalBtn = document.getElementById('modalReadyBtn');
+
+    // Show modal with animation
+    setTimeout(() => {
+        modal.classList.add('active');
+    }, 300);
+
+    // Close modal when ready button is clicked
+    modalBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
     });
 }
 
@@ -648,11 +665,18 @@ function initGameChoice2() {
 }
 
 // GAME MISSION CHOICE
-const missionDoors = document.querySelectorAll('#gameMission .door');
-missionDoors.forEach(door => {
-    door.addEventListener('click', () => {
-        nextSlide();
-    });
+function initMissionChoice() {
+    const puraVidaBtn = document.querySelector('.pura-vida-btn');
+    if (puraVidaBtn) {
+        puraVidaBtn.addEventListener('click', () => {
+            nextSlide();
+        });
+    }
+}
+
+// Initialize mission choice on page load
+document.addEventListener('DOMContentLoaded', () => {
+    initMissionChoice();
 });
 
 // GAME CHOICE 3: Mission Result

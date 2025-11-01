@@ -10,7 +10,18 @@
     <link rel="alternate icon" type="image/svg+xml" href="favicon-simple.svg">
     <link rel="apple-touch-icon" href="favicon-simple.svg">
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Lottie Animation Library -->
+    <script
+      src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.5/dist/dotlottie-wc.js"
+      type="module"
+    ></script>
 </head>
 <body>
     <!-- Progress Indicator -->
@@ -22,9 +33,24 @@
     <!-- Bottom Swipe Indicator -->
     <div class="swipe-indicator"></div>
 
+    <!-- Gift Adventure Modal -->
+    <div class="modal-overlay" id="giftModal">
+        <div class="modal-content">
+            <h2 class="modal-title">Bubu is about to unwrap her gift adventure</h2>
+            <p class="modal-description">Are you ready? Choose</p>
+            <button class="modal-btn" id="modalReadyBtn">I'm Ready!</button>
+        </div>
+    </div>
+
     <!-- Slide 1: Welcome -->
     <div class="slide active" id="slide1">
         <div class="slide-content">
+            <dotlottie-wc
+              src="https://lottie.host/947d2f57-a509-425f-8fdc-69ff07620b55/MmYx86zgs5.lottie"
+              style="width: 300px; height: 300px"
+              autoplay
+              loop
+            ></dotlottie-wc>
             <h1 class="birthday-title">Happy Birthday Bubu</h1>
             <p class="intro-text">Hi KiwiBear. It's that time of the year again.</p>
             <p class="intro-text">Gabe Wrapped's ready. Are you?</p>
@@ -97,7 +123,12 @@
     <!-- Game Plane: Costa Rica -->
     <div class="slide" id="gamePlane">
         <div class="slide-content game-screen">
-            <canvas id="planeCanvas" width="300" height="200"></canvas>
+            <dotlottie-wc
+              src="https://lottie.host/572730c0-9dd7-4df0-82c5-bc1a147882b9/eptLNB4XeM.lottie"
+              style="width: 300px; height: 300px"
+              autoplay
+              loop
+            ></dotlottie-wc>
             <button class="board-plane-btn">Board Plane</button>
         </div>
     </div>
@@ -140,11 +171,14 @@
     <!-- Game Choice 3: Mission -->
     <div class="slide" id="gameMission">
         <div class="slide-content game-screen">
-            <p class="game-text">Pick your mission starting point</p>
-            <div class="doors-container">
-                <div class="door door-red" data-choice="mission-1"></div>
-                <div class="door door-yellow" data-choice="mission-2"></div>
-            </div>
+            <dotlottie-wc
+              src="https://lottie.host/1b7ae71d-53a4-4f53-9710-cea0fd3d556c/SckLUrzdUH.lottie"
+              style="width: 300px; height: 300px"
+              autoplay
+              loop
+            ></dotlottie-wc>
+            <p class="game-text mission-description">Bubu step into your first stop in Costa Rica</p>
+            <button class="pura-vida-btn">Pura Vida Baby</button>
         </div>
     </div>
 
@@ -197,7 +231,7 @@
                             </div>
                         </div>
                         <div class="gift-card-back">
-                            <img src="./assets/card-backs/costarica.jpg" alt="Costa Rica Sloth" class="card-back-image">
+                            <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQBkXuI--4h3aa14DkbeBTXmyVgpXP92vDkBoJaSFxNXW0RmJOcrX7n17jO0N3359bt_BI4Qbi0" alt="Costa Rica" class="card-back-image">
                             <div class="card-back-overlay">
                                 <p class="card-back-text">Discover wonderful sloths in Costa Rica!</p>
                             </div>
